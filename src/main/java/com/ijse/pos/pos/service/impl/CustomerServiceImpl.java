@@ -21,13 +21,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public String saveCustomer(CustomerDto dto) {
-        Customer c= customerMapper.toCustomer(dto);
-        System.out.println(c.getName());
-//        customerRepo.save(
-//                new Customer(dto.getId(), dto.getName(),
-//                        dto.getAddress(), dto.getSalary())
-//        );
-        return null;
+        return customerRepo.save(
+                customerMapper.toCustomer(dto))
+                .getName();
     }
 
     @Override

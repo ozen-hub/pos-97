@@ -14,8 +14,7 @@ public class CustomerController {
     public String saveCustomer(
           @RequestBody CustomerDto dto
     ) {
-        customerService.saveCustomer(dto);
-        return "save Customer";
+       return customerService.saveCustomer(dto)+" Saved!";
     }
 
     @PutMapping
