@@ -41,7 +41,7 @@ public class CustomerController {
     public ResponseEntity<StandardResponse> deleteCustomer(@RequestParam String id) {
         return new ResponseEntity<>(
                 new StandardResponse(204," Deleted",
-                        customerService.deleteCustomer(id)),HttpStatus.NO_CONTENT
+                        customerService.deleteCustomer(id)),HttpStatus.OK
         );
     }
 
