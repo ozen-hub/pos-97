@@ -38,8 +38,11 @@ public class CustomerController {
     }
 
     @DeleteMapping
-    public String deleteCustomer(@RequestParam String id) {
-        return "delete Customer";
+    public ResponseEntity<StandardResponse> deleteCustomer(@RequestParam String id) {
+        return new ResponseEntity<>(
+                new StandardResponse(204," Deleted",
+                        customerService.deleteCustomer(id)),HttpStatus.NO_CONTENT
+        );
     }
 
     @GetMapping("/all")
