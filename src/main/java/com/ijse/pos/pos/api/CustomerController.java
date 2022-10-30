@@ -26,10 +26,14 @@ public class CustomerController {
     }
 
     @PutMapping
-    public String updateCustomer(
+    public ResponseEntity<StandardResponse> updateCustomer(
             @RequestBody CustomerDto dto
     ) {
-        return "Update Customer";
+        return new ResponseEntity<>(
+                new StandardResponse(201,
+                        customerService.saveCustomer(dto).getId()+" Saved!",
+                        customerService.updateCustomer(dto)),HttpStatus.CREATED
+        );
     }
 
     @GetMapping("/{id}")
