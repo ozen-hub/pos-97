@@ -43,7 +43,10 @@ public class CustomerController {
     }
 
     @GetMapping("/all")
-    public String getAllCustomers() {
-        return "get All Customers";
+    public ResponseEntity<StandardResponse> getAllCustomers() {
+        return new ResponseEntity<>(
+                new StandardResponse(200," Customer List!",
+                customerService.getAllCustomers()),HttpStatus.OK
+        );
     }
 }
