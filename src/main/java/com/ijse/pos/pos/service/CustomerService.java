@@ -7,6 +7,6 @@ public interface CustomerService {
     public CustomerDto saveCustomer(CustomerDto dto);
     public String updateCustomer(CustomerDto dto);
     public String deleteCustomer(String id);
-    public String getCustomer(String id);
+    public CustomerDto getCustomer(String id);
     public PaginatedResponseDto getAllCustomers();
 }

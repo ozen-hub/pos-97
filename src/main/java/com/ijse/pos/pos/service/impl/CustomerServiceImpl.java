@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -44,7 +45,16 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public String getCustomer(String id) {
+    public CustomerDto getCustomer(String id) {
+        Optional<Customer> optional = customerRepo.findById(id);
+        if (optional.isPresent()){
+            return new CustomerDto(
+                    optional.get().getId(),
+                    optional.get().getName(),
+                    optional.get().getAddress(),
+                    optional.get().getSalary()
+            );
+        }
         return null;
     }
 

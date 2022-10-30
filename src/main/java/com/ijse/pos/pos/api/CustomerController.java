@@ -33,8 +33,11 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public String getCustomer(@PathVariable String id) {
-        return "get Customer";
+    public  ResponseEntity<StandardResponse> getCustomer(@PathVariable String id) {
+        return new ResponseEntity<>(
+                new StandardResponse(200," Customer Data",
+                        customerService.getCustomer(id)),HttpStatus.OK
+        );
     }
 
     @DeleteMapping
