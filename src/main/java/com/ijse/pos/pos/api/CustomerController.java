@@ -43,11 +43,7 @@ public class CustomerController {
     }
 
     @GetMapping("/all")
-    public String getAllCustomers(
-            @RequestParam int page,
-            @RequestParam int size,
-            @RequestParam String searchText
-    ) {
+    public String getAllCustomers() {
         return "get All Customers";
     }
 }

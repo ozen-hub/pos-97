@@ -1,11 +1,15 @@
 package com.ijse.pos.pos.service.impl;
 
 import com.ijse.pos.pos.dto.CustomerDto;
+import com.ijse.pos.pos.dto.paginated.PaginatedResponseDto;
 import com.ijse.pos.pos.entity.Customer;
 import com.ijse.pos.pos.repo.CustomerRepo;
 import com.ijse.pos.pos.service.CustomerService;
 import com.ijse.pos.pos.util.mapper.CustomerMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -21,9 +25,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDto saveCustomer(CustomerDto dto) {
-        return customerMapper.toCustomerDto(customerRepo.save(
-                        customerMapper.toCustomer(dto))
+        customerRepo.save(
+                new Customer(dto.getId(), dto.getName(),
+                        dto.getAddress(),dto.getSalary())
         );
+        return dto;
     }
 
     @Override
@@ -42,7 +48,20 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public String getAllCustomers(int page, int size, String searchText) {
-        return null;
+    public PaginatedResponseDto getAllCustomers() {
+        List<Customer> all = customerRepo.findAll();
+        List<CustomerDto> dtoList= new ArrayList<>();
+        for (Customer c:all
+             ) {
+            dtoList.add(
+                    new CustomerDto(c.getId(),c.getName(),
+                            c.getAddress(),c.getSalary())
+            );
+        }
+        return
+                new PaginatedResponseDto(
+                        all.size(),
+                        dtoList
+                );
     }
 }
