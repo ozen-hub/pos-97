@@ -20,10 +20,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public String saveCustomer(CustomerDto dto) {
-        return customerRepo.save(
-                customerMapper.toCustomer(dto))
-                .getName();
+    public CustomerDto saveCustomer(CustomerDto dto) {
+        return customerMapper.toCustomerDto(customerRepo.save(
+                        customerMapper.toCustomer(dto))
+        );
     }
 
     @Override
